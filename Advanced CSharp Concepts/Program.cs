@@ -1,4 +1,5 @@
 ﻿using Advanced_CSharp_Concepts.Delegates;
+using Advanced_CSharp_Concepts.LambdaExpressions;
 using System;
 
 namespace Advanced_CSharp_Concepts
@@ -15,8 +16,8 @@ namespace Advanced_CSharp_Concepts
             #endregion
 
             #region Delegates
-            //PhotoProcessor photoProcessor = new PhotoProcessor();
             //Without Delegate
+            //PhotoProcessor photoProcessor = new PhotoProcessor();
             //photoProcessor.NonDelegateProcess("");
 
             //With Delegate
@@ -25,18 +26,50 @@ namespace Advanced_CSharp_Concepts
             //GenericDelegate
             //PhotoProcessor.PhotoFilterHandler filterHandler = filters.ApplyBrightness;
             //Using Action
-            Action<Photo> filterHandler = filters.ApplyBrightness;
-            filterHandler += filters.ApplyContrast;
-            filterHandler += RemoveRedEyeFilter;
-            processor.DelegateProcess("", filterHandler);
+            //Action<Photo> filterHandler = filters.ApplyBrightness;
+            //filterHandler += filters.ApplyContrast;
+            //filterHandler += RemoveRedEyeFilter;
+            //processor.DelegateProcess("", filterHandler);
+            //void RemoveRedEyeFilter(Photo photo)
+            //{
+            //    Console.WriteLine("Apply Remove Red Eye");
+            //    Console.ReadLine();
+            //}
+            #endregion
+
+            #region Lambda
+            //Old Method way
+            //var num = Lambda.Square(5);
+            //Console.WriteLine("Via Static Methods: " + num);
+
+            //Lambda Way
+            // args => expression
+            // * () => ...
+            //(x,y,z) => ...
+            //Func<int, int> Square = number => number * number;
+            //Console.WriteLine("Via Lambda: "+ Square(5));
+            //Console.ReadLine();
+
+            var books = new BookRepository().GetBooks();
+            var cheapbooks = books.FindAll(IsCheaperThan10Dollars);
+            bool IsCheaperThan10Dollars(Book book)
+            {
+                return book.Price < 10;
+            }
+
+            //OR With Lambda Expression
+            //var cheapbooks = books.FindAll(book => book.Price <10);
+
+            foreach (var book in cheapbooks)
+            {
+                Console.WriteLine(book.Title);
+                Console.Read();
+            }
             #endregion
 
         }
 
-        static void RemoveRedEyeFilter(Photo photo)
-        {
-            Console.WriteLine("Apply Remove Red Eye");
-            Console.ReadLine();
-        }
+
+        
     }
 }
