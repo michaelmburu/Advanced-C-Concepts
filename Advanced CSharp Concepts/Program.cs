@@ -1,4 +1,5 @@
 ﻿using Advanced_CSharp_Concepts.Delegates;
+using Advanced_CSharp_Concepts.Events;
 using Advanced_CSharp_Concepts.LambdaExpressions;
 using System;
 
@@ -50,26 +51,38 @@ namespace Advanced_CSharp_Concepts
             //Console.WriteLine("Via Lambda: "+ Square(5));
             //Console.ReadLine();
 
-            var books = new BookRepository().GetBooks();
-            var cheapbooks = books.FindAll(IsCheaperThan10Dollars);
-            bool IsCheaperThan10Dollars(Book book)
-            {
-                return book.Price < 10;
-            }
+            //var books = new BookRepository().GetBooks();
+            //var cheapbooks = books.FindAll(IsCheaperThan10Dollars);
+            //bool IsCheaperThan10Dollars(Book book)
+            //{
+            //    return book.Price < 10;
+            //}
 
             //OR With Lambda Expression
             //var cheapbooks = books.FindAll(book => book.Price <10);
 
-            foreach (var book in cheapbooks)
-            {
-                Console.WriteLine(book.Title);
-                Console.Read();
-            }
+            //foreach (var book in cheapbooks)
+            //{
+            //    Console.WriteLine(book.Title);
+            //    Console.Read();
+            //}
+            #endregion
+
+            #region Events
+            var video = new Video() { Title = "Video 1" };
+            var videoEncoder = new VideoEncoder(); // publisher
+            var mailService = new MailService(); //subscriber
+            var messageService = new MessageService(); //subscriber
+
+            videoEncoder.VideoEncoded += mailService.OnVideoEncoded;
+            videoEncoder.VideoEncoded += messageService.OnVideoEncoded;
+
+            videoEncoder.Encode(video);
+        
             #endregion
 
         }
 
-
-        
+ 
     }
 }
