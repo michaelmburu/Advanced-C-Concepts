@@ -1,7 +1,11 @@
 ﻿using Advanced_CSharp_Concepts.Delegates;
 using Advanced_CSharp_Concepts.Events;
+using Advanced_CSharp_Concepts.ExtensionMethods;
 using Advanced_CSharp_Concepts.LambdaExpressions;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Advanced_CSharp_Concepts
 {
@@ -69,16 +73,23 @@ namespace Advanced_CSharp_Concepts
             #endregion
 
             #region Events
-            var video = new Video() { Title = "Video 1" };
-            var videoEncoder = new VideoEncoder(); // publisher
-            var mailService = new MailService(); //subscriber
-            var messageService = new MessageService(); //subscriber
+            //var video = new Video() { Title = "Video 1" };
+            //var videoEncoder = new VideoEncoder(); // publisher
+            //var mailService = new MailService(); //subscriber
+            //var messageService = new MessageService(); //subscriber
 
-            videoEncoder.VideoEncoded += mailService.OnVideoEncoded;
-            videoEncoder.VideoEncoded += messageService.OnVideoEncoded;
+            //videoEncoder.VideoEncoded += mailService.OnVideoEncoded;
+            //videoEncoder.VideoEncoded += messageService.OnVideoEncoded;
 
-            videoEncoder.Encode(video);
-        
+            //videoEncoder.Encode(video);
+
+            #endregion
+
+            #region ExtensionMethods
+            string post = "This is supposed to be a very long blog post";
+            var shortenPost = post.Shorten(5);
+                       Console.WriteLine(shortenPost);
+            Console.ReadLine();
             #endregion
 
         }
