@@ -6,4 +6,8 @@
     <RootNamespace>Advanced_CSharp_Concepts</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Program.cs~RF1dc31191.TMP" />
+  </ItemGroup>
+
 </Project>
